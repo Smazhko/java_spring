@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class UserController {
 
     /**
      * Удаление пользователя из базы - GET запрос, в котором передаётся ID пользователя для удаления.
-     * Для того, чтобы SPRING считал ID пользователя из адреса, применяем аннотацию @PathVariable.
+     * Для того чтобы SPRING считал ID пользователя из адреса, применяем аннотацию @PathVariable.
      * Ситалнную переменную отправляем дальше по методам сервиса и репозитория.
      * @param id
      * @return перенаправление на страницу всех пользователей
