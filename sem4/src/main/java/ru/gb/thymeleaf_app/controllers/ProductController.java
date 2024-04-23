@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     // ----------------------------------------------
-    @GetMapping("product_delete/{id}")
+    @PostMapping("product_delete/{id}")
     public String deleteProductById(@PathVariable Long id) {
         prodSrvc.deleteProductById(id);
         return "redirect:/products";
@@ -60,6 +60,8 @@ public class ProductController {
     // ----------------------------------------------
     @GetMapping("product_edit/{id}")
     public String updateUserForm(@PathVariable Long id, Model model) {
+        // получаем объект, который надо отредактировать через ID из запроса
+        // помещаем этоот объект в МОДЕЛЬ, чтобы на страничке заполнить поля в форме старыми данными
         Product prodToEdit = prodSrvc.getProductById(id);
         model.addAttribute("prodToEdit", prodToEdit);
         return "product_edit";

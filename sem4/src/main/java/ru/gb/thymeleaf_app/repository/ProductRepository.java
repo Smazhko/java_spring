@@ -17,18 +17,6 @@ public class ProductRepository {
 
     public List<Product> getAllProducts() {
         String sql = "SELECT * FROM productTable;";
-//        Создается объект RowMapper<User>.
-//        @FunctionalInterface
-//        public interface RowMapper<T> {
-//              @Nullable
-//              T mapRow(ResultSet rs, int rowNum) throws SQLException; }
-//        RowMapper - это интерфейс, предоставляемый Spring JDBC,
-//        который используется для сопоставления строк из результата запроса с объектами Java.
-//        В данном случае, создается анонимный класс, который реализует интерфейс RowMapper<User>.
-//        Метод mapRow() этого класса извлекает данные из результирующей строки ResultSet и создает
-//        объект User на основе этих данных. Метод getInt() извлекает значение типа int из столбца
-//        с указанным именем, а метод getString() извлекает значение типа String. Затем, эти значения
-//        устанавливаются в поля объекта User. Наконец, созданный объект User возвращается.
         RowMapper<Product> productRowMapper = (resultSet, rowNum) -> {
             Product rowObject = new Product();
             rowObject.setId(resultSet.getLong("id"));
