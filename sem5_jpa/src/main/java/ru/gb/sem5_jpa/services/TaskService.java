@@ -21,7 +21,7 @@ public class TaskService {
     }
 
     @Transactional(readOnly = true)
-    public Task getTaskById(Long id){
+    public Task getTaskById(Long id) throws TaskNotFoundException {
         return taskRep.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
     }
 
