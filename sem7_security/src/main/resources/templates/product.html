@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<title th:text="'СТРАНИЦА ПРОДУКТА - ' + ${product.name}">Product</title>
+</head>
+
+<body>
+    <div th:replace="~{page-templates :: navbar}"></div>
+
+    <div class="form-block">
+        <span class="form-label">ID</span>
+        <input class="form-control" type="number" readonly th:value="${product.id}" id="id" placeholder="Name"><br>
+        <span class="form-label">Name</span>
+        <input class="form-control" type="text" readonly th:value="${product.name}" id="name" placeholder="Name"><br>
+        <span class="form-label">Price</span>
+        <input class="form-control" type="number" readonly th:value="${product.price}" id="price" placeholder="Price"><br>
+        <span class="form-label">Count</span>
+        <input class="form-control" type="number" readonly th:value="${product.count}" id="count" placeholder="Count"><br>
+
+        <div style="width: 100%; text-align: right;">
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{product_edit/{id}(id=${product.id})}"><img class="imgButton" src="img/edit.png"></a>&nbsp;&nbsp;
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{product_delete/{id}(id=${product.id})}"><img class="imgButton" src="img/recycle1.png"></a>&nbsp;&nbsp;
+            <a href="products"><img class="imgButton" src="img/goback.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+</body>
+
+</html>

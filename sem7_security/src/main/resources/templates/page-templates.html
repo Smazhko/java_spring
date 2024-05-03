@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Spring Boot Tutorial</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<div th:fragment="navbar">
+		<nav class="navbar">
+			<h1 class="logo">Simple Spring Security Application</h1>
+			<ul class="nav-links">
+				<li class="nav-item"><a href="/">Home</a></li>
+				<li sec:authorize="hasRole('ADMIN')" class="nav-item"><a href="/admin">Admin</a></li>
+				<li sec:authorize="hasRole('USER')" class="nav-item"><a href="/user">User</a></li>
+				<li sec:authorize="!isAuthenticated()" class="nav-item"><a href="/login">Login</a></li>
+				<li sec:authorize="isAuthenticated()" class="nav-item">
+					<form class="link" th:action="@{/logout}" method="post">
+					<input class="link" type="submit" value="Logout"/>
+        			</form></li>
+			</ul>
+		</nav>
+	</div>
+
+
+	<div th:fragment="add-new-product-form">
+		<h2>Products</h2>
+		<form class="form-block" action="/products" th:object="${newProduct}" method="post">
+			<span class="form-label">Name</span>
+			<input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Name"><br>
+			<span class="form-label">Price</span>
+			<input class="form-control" type="number" th:field="*{price}" id="price" placeholder="Price"><br>
+			<span class="form-label">Count</span>
+			<input class="form-control" type="number" th:field="*{count}" id="count" placeholder="Count"><br>
+			<div style="width: 100%; text-align: right;">
+				<input class="imgButton" type="submit" value="" style="background: url('img/add.png') no-repeat; background-size: cover;">&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+		</form>
+	</div>
+
+	<div th:fragment="prod-list">
+		<h3>Products List</h3>
+		<table class="table table-bordered">
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Count</th>
+				<th class="unbordered-cell"></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="product : ${prodList}">
+				<td style="text-align: left;">
+					<a th:href="@{/{id}(id=${product.id})}" th:text="${product.name}">product.name</a>
+				</td>
+				<td th:text="${product.price}" style="text-align: right;">product.price</td>
+				<td th:text="${product.count}" style="text-align: right;">product.count</td>
+				<td class="unbordered-cell">
+					<a th:href="@{product_delete/{id}(id=${product.id})}" title="Delete product"><img class="imgButton" src="img/recycle1.png"></a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+
+
+
+	<div th:fragment="main-text"></div>
+	<div th:fragment="footer">
+		<p class="center">Seminar 7 - Spring Security Basics</p>
+	</div>
+</body>
+</html>
