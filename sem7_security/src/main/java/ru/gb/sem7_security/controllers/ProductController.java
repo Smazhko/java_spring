@@ -17,25 +17,25 @@ public class ProductController {
     private ProductService prodSrvc;
 
     // ---------------------------------------------
-    @GetMapping("/")
+    @GetMapping(value= {"/", "/index"})
     public String showAllProducts(Product newProd, Model model) {
         model.addAttribute("newProduct", newProd);
 
         List<Product> prodList = prodSrvc.getAllProducts();
         model.addAttribute("prodList", prodList);
 
-        return "products";
+        return "index";
     }
 
     // --------------------------------------------
-    @PostMapping("products")
+    @PostMapping("admin")
     public String addNewProduct(Product newProd, Model model) {
         prodSrvc.addNewProduct(newProd);
 
         List<Product> prodList = prodSrvc.getAllProducts();
         model.addAttribute("prodList", prodList);
 
-        return "redirect:/products";
+        return "redirect:/admin";
     }
 
     // ----------------------------------------------
