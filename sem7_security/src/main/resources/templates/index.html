@@ -3,20 +3,21 @@
 	xmlns:th="https://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
-	<link rel="stylesheet" href="css/style.css">
-	<title>Shop "Shop"</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+		<title>Shop "Shop" for All</title>
+	</head>
 
-<body>
-	<div th:replace="~{page-templates :: navbar}"></div>
+	<body>
+		<div th:replace="~{page-templates :: navbar}"></div>
 
-	<div th:replace="~{page-templates :: welcome}"></div>
+		<div th:replace="~{page-templates :: welcome}"></div>
 
-	<div th:replace="~{page-templates :: prod-list}"></div>
+		<div th:replace="~{page-templates :: prod-list}"></div>
 
-	<div th:replace="~{page-templates :: footer}"></div>
-</body>
+		<div th:replace="~{page-templates :: footer}"></div>
+	</body>
+
 </html>

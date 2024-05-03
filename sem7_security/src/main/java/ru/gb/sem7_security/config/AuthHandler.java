@@ -22,9 +22,13 @@ public class AuthHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+
+        roles.forEach(System.out::println);
+
         if (roles.contains("ROLE_ADMIN")) {
             response.sendRedirect("/admin");
-        } else {
+        }
+        if (roles.contains("ROLE_USER")) {
             response.sendRedirect("/user");
         }
     }

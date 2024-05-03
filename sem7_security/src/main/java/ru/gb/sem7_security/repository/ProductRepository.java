@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.gb.sem7_security.domain.Product;
 
 @Repository
-public interface ProdRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
 }
