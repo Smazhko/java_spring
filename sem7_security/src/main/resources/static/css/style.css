@@ -143,6 +143,12 @@ td {
         border-collapse: collapse;
     }
 
+    th,
+    td {
+        min-width: 50px;
+        max-width: 25vw;
+    }
+
     .form-block {
         max-width: 100%;
         min-width: 80%;
