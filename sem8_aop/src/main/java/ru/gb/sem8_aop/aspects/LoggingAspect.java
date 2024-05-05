@@ -51,5 +51,36 @@ public class LoggingAspect {
         return resultValue;
     }
 
+    // МЕТОД НЕ РАБОТАЕТ ! точнее - из-за неправильной комбинации передаваемых в метод аргументов,
+    // СПРИНГ не может создать БИН аспект-класса.
+    // метод, реализующий @AfterReturning, не может принимать  JoinPoint / ProceedingJoinPoint на вход,
+    // видимо потому, что метод уже отработал к моменту AfterReturning
+    // ВЫВОД! МЕТОДЫ, РЕАЛИЗУЮЩИЕ КАЖДОГО ИЗ ADVICE, должны на вход принимать конкретные аргументы
+    // THROWING - исключение, AFTERReturning - результат и т.д.
+
+//    @AfterReturning(value = "@annotation(TrackUserAction)", returning = "resultValue")
+//    public void anotherLogUser(Object resultValue, JoinPoint targetMethod) {
+//        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+//
+//        Annotation[] targetMethodAnno = ((MethodSignature) targetMethod.getSignature()).getMethod().getAnnotations();
+//        String targetMethodAnnoStr = targetMethodAnno.length > 0 ? " (" + Arrays.toString(targetMethodAnno) + ") " : "";
+//
+//        Object[] targetMethodArgs = targetMethod.getArgs();
+//        String targetMethodArgsStr = targetMethodArgs.length > 0 ? " с аргументами ["
+//                + Arrays.toString(targetMethodArgs) + "]" : " без аргументов";
+//
+//        String log = ">>> LOG " +
+//                dateFormat.format(new Date()) +
+//                ": вызван метод " +
+//                targetMethod.getSignature().getName() +
+//                targetMethodAnnoStr +
+//                targetMethodArgsStr +
+//                " с результатом: " +
+//                resultValue +
+//                ".\n";
+//
+//        System.out.println(log);
+//    }
+
 
 }
