@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{/shop/css/style.css}">
+<link rel="stylesheet" href="../css/style.css">
+<title th:text="'РЕДАКТИРОВАНИЕ ПРОДУКТА - ' + ${prodToEdit.name}">Product Edit</title>
+</head>
+
+<body>
+    <div th:replace="~{page-templates :: navbar}"></div>
+
+    <h2 class="center">Editing product...</h2>
+    <br>
+
+    <div th:replace="~{page-templates :: edit-product}"></div>
+
+    <div th:replace="~{page-templates :: footer}"></div>
+</body>
+
+</html>

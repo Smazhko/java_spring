@@ -1,0 +1,14 @@
+server:
+  port: 8888
+
+
+spring:
+  application:
+    name: api_gateway
+  cloud:
+    gateway:
+      routes:
+        - id: sem8_aop
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/shop/**
