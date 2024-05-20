@@ -13,10 +13,13 @@ public class ApiGatewayApplication {
 		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 
+// СМОТРИ СКРИНШОТ В МАТЕРИАЛАХ - НАСТРОЙКИ С ПУТЯМИ
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route("sem8_aop",r->r.path("/shop/**")
 						.uri("http://localhost:8082/"))
+				.route("sem5_jpa",r->r.path("/tasks/**")
+						.uri("http://localhost:8081/"))
 						.build();}
 }

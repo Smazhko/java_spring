@@ -10,14 +10,13 @@ import ru.gb.sem8_aop.services.ProductService;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/shop") // <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 @AllArgsConstructor
 public class ProductController {
     private ProductService prodSrvc;
 
     // ---------------------------------------------
     //@GetMapping(value= {"/", "/index"})
-    @GetMapping("/shop")
+    @GetMapping("/")
     public String showAllProductsToAll(Product newProd, Model model) {
         List<Product> prodList = prodSrvc.getAllProducts();
         model.addAttribute("prodList", prodList);
@@ -58,18 +57,18 @@ public class ProductController {
     }
 
     // --------------------------------------------
-    @PostMapping("/admin")
+    @PostMapping("admin")
     public String addNewProduct(Product newProd, Model model) {
         prodSrvc.addNewProduct(newProd);
 
         List<Product> prodList = prodSrvc.getAllProducts();
         model.addAttribute("prodList", prodList);
 
-        return "admin";
+        return "redirect:/admin";
     }
 
     // ----------------------------------------------
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public String showProductById(Model model, @PathVariable Long id) {
         Product prod = prodSrvc.getProductById(id);
         model.addAttribute("product", prod);
@@ -84,30 +83,30 @@ public class ProductController {
     @GetMapping("/product_buy/{id}")
     public String butProductById(@PathVariable Long id) {
         prodSrvc.deleteProductById(id);
-        return "user";
+        return "redirect:/user";
     }
     // ----------------------------------------------
     @GetMapping("/product_delete/{id}")
     public String deleteProductById(@PathVariable Long id) {
         prodSrvc.deleteProductById(id);
-        return "admin";
+        return "redirect:/admin";
     }
 
     // ----------------------------------------------
-    @GetMapping("/product_edit/{id}")
+    @GetMapping("product_edit/{id}")
     public String showUpdateForm(@PathVariable Long id, Model model) {
         // получаем объект, который надо отредактировать через ID из запроса
-        // помещаем этоот объект в МОДЕЛЬ, чтобы на страничке заполнить поля в форме старыми данными
+        // помещаем этот объект в МОДЕЛЬ, чтобы на страничке заполнить поля в форме старыми данными
         Product prodToEdit = prodSrvc.getProductById(id);
         model.addAttribute("prodToEdit", prodToEdit);
         return "product_edit";
     }
 
     // +
-    @PostMapping("/product_edit/{id}")
+    @PostMapping("product_edit/{id}")
     public String editProductById(Product product) {
         prodSrvc.updateProduct(product);
-        return "admin";
+        return "redirect:/admin";
     }
 
 }

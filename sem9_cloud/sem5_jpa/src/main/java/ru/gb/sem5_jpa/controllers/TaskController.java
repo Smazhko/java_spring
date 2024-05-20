@@ -14,7 +14,7 @@ import java.util.List;
 public class TaskController {
     private TaskService taskService;
 
-    @GetMapping("/")
+    @GetMapping("/tasks")
     public List<Task> getAllTasks(){
         return taskService.getAllTasks();
     }
