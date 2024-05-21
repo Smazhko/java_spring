@@ -1,9 +1,8 @@
-package ru.gb.sem8_aop.config;
+package ru.gb.sem11_prometheus.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +22,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 		.authorizeHttpRequests((authorize) -> authorize
-			.requestMatchers("/css/**", "/favicon.ico", "/img/**", "/", "/index", "/login", "").permitAll()
+			.requestMatchers("/css/**", "/favicon.ico", "/img/**", "/", "/index", "/login", "/actuator", "/actuator/**").permitAll()
 			.requestMatchers("/user", "/product").hasAnyRole("USER")
 			.requestMatchers("/admin", "/product","/product_edit").hasAnyRole("ADMIN")
 			.anyRequest().authenticated()
@@ -65,11 +64,16 @@ public class SecurityConfig {
 }
 
 /*
-Кросс-сайтовая подделка запроса (CSRF) - это вид атаки на веб-приложения, при котором несанкционированный пользователь отправляет запрос от имени аутентифицированного пользователя. Цель CSRF-атаки - выполнить некоторое действие от имени пользователя без его согласия.
+Кросс-сайтовая подделка запроса (CSRF) - это вид атаки на веб-приложения, при котором несанкционированный пользователь
+отправляет запрос от имени аутентифицированного пользователя. Цель CSRF-атаки - выполнить некоторое действие от имени
+пользователя без его согласия.
 
-Spring Security по умолчанию включает защиту от CSRF-атак с помощью генерации и использования CSRF токенов. CSRF токен - это уникальный токен, который генерируется на стороне сервера и передается клиенту. Клиент должен отправить этот токен обратно на сервер при выполнении защищенного действия (например, при отправке POST запроса).
+Spring Security по умолчанию включает защиту от CSRF-атак с помощью генерации и использования CSRF токенов.
+CSRF токен - это уникальный токен, который генерируется на стороне сервера и передается клиенту. Клиент должен
+отправить этот токен обратно на сервер при выполнении защищенного действия (например, при отправке POST запроса).
 
-Чтобы добавить CSRF токен к вашему запросу, вы можете включить его в вашу форму входа в HTML коде. В Thymeleaf это можно сделать с помощью атрибута th:csrf. Вот пример:
+Чтобы добавить CSRF токен к вашему запросу, вы можете включить его в вашу форму входа в HTML коде. В Thymeleaf
+это можно сделать с помощью атрибута th:csrf. Вот пример:
 
 html
 Copy code

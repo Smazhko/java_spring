@@ -1,9 +1,8 @@
-package ru.gb.sem8_aop.config;
+package ru.gb.sem11_prometheus.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +22,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 		.authorizeHttpRequests((authorize) -> authorize
-			.requestMatchers("/css/**", "/favicon.ico", "/img/**", "/", "/index", "/login", "").permitAll()
+			.requestMatchers("/css/**", "/favicon.ico", "/img/**", "/", "/index", "/login", "/actuator", "/actuator/**").permitAll()
 			.requestMatchers("/user", "/product").hasAnyRole("USER")
 			.requestMatchers("/admin", "/product","/product_edit").hasAnyRole("ADMIN")
 			.anyRequest().authenticated()
